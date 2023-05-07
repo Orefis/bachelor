@@ -1,0 +1,4 @@
+rootProject.name = 'demo'
+
+include(':src:modules:backend')
+include(':src:modules:frontend')
