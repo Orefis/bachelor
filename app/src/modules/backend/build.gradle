@@ -1,0 +1,45 @@
+plugins {
+  id 'org.springframework.boot' version '2.6.4'
+  id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+  id 'java'
+  id 'org.beryx.runtime' version '1.12.7'
+}
+
+group = 'com.example'
+version = '1.0.0'
+sourceCompatibility = '17'
+mainClassName = 'com.example.demo.ApplicationRunner'
+
+configurations {
+  compileOnly {
+    extendsFrom annotationProcessor
+  }
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  implementation 'org.springframework.boot:spring-boot-starter-web'
+  implementation project(':src:modules:frontend')
+  compileOnly 'org.projectlombok:lombok'
+  annotationProcessor 'org.projectlombok:lombok'
+  testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+  useJUnitPlatform()
+}
+
+runtime {
+  modules = ['java.naming', 'java.desktop', 'java.sql', 'jdk.unsupported',
+             'jdk.management',
+             'java.security.jgss',
+             'java.instrument',] // wymagane moduły JDK
+
+  jpackage {
+    installerOutputDir = file("$buildDir/installer") // miejsce gdzie zostanie umieszczona paczka
+    skipInstaller = true // na razie pomijamy konstrukcję instalatora
+  }
+}

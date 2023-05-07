@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-xs-10">
+    <app-calories-edit></app-calories-edit>
+    <hr>
+    <ul class="list-group">
+      <a
+        class="list-group-item"
+        style="cursor: pointer"
+        *ngFor="let calories of calories; let i = index"
+        (click)="onEditItem(i)"
+      >
+        <p>
+          {{calories.name}},
+          calories: {{calories.calculatedCalories()}}
+        </p>
+      </a>
+    </ul>
+  </div>
+</div>
